@@ -30,7 +30,7 @@ for i1 = 1:length(matList)
     clickDnumTemp = [];
     % only need to load hdr and click times
     load(fullfile(inDir,matList(i1).name),'hdr','clickTimes', 'durClick', ...
-        'nDur', 'peakFr','ppSignal','specClickTf','yFilt')
+        'nDur', 'peakFr','ppSignal','specClickTf','yFilt','f')
     if ~isempty(clickTimes)
     % determine true click times
         clickDnumTemp = (clickTimes./sec2dnum) + hdr.start.dnum + datenum([2000,0,0]);
@@ -126,7 +126,7 @@ GraphDir = 'D:\metadata\matlab_graphs';
 %Then save everything
 save([inDir,'\',choppedDir{3},'_ClicksOnlyConcat',filedate,'.mat'],...
     'clickDnum','durClickcon','nDurcon', 'peakFrcon','ppSignalcon',...
-    'specClickTfcon','yFiltcon','medianValues','meanSpecClicks','iciEncs')
+    'specClickTfcon','yFiltcon','medianValues','meanSpecClicks','iciEncs','f')
 
 
 
