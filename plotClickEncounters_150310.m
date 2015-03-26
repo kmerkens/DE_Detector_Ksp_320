@@ -1,10 +1,14 @@
 
 function plotClickEncounters_150310(encounterTimes,clickTimes,ppSignal,...
     durClick,specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,f)
+%Generates plots of clicks according to encounter start/end times, as long
+%as the encounter is contained within one .xwav. (so, it's mostly useless) 
+
+
 
 fs = hdr.fs;
 
-%,Convert all clicTimes to "real" datenums, relative to baby jesus
+%Convert all clicTimes to "real" datenums, relative to baby jesus
 sec2dnum = 60*60*24; % conversion factor to get from seconds to matlab datenum
 clickDnum = (clickTimes./sec2dnum) + hdr.start.dnum + datenum([2000,0,0]);
 

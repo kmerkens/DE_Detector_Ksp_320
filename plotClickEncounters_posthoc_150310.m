@@ -1,6 +1,9 @@
 
 function [medianValues,meanSpecClicks,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,clickTimes,ppSignal,...
     durClick,specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,fs)
+% Generates a set of plots for each encounter, even if they span multiple
+% xwavs. Called by cat_click_times.m for plotting after the detector has
+% been run.
 
 %,Convert all clicTimes to "real" datenums, relative to baby jesus
 

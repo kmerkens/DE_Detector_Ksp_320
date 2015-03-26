@@ -55,7 +55,7 @@ for c = 1:size(clicks,1)
     % Pull out band passed click timeseries
     yFiltBuff{c} = wideBandData(max(clicks(c,1)-buffVal,1):min(clicks(c,2)+buffVal,size(wideBandData,2)));
     yFiltLength = clicks(c,2)-clicks(c,1)+1;
-    yFilt{c,1}(1:yFiltLength) = wideBandData(clicks(c,1):clicks(c,2));
+    yFilt{c,1}(1:yFiltLength) = wideBandData(clicks(c,1):clicks(c,2)); %changed to only extract portion of bandwidth allowed through BPF
     %convert  timeseries into counts
     if strcmp(hdr.fType, 'xwav')
         click = yFilt{c}*2^14;
@@ -148,61 +148,6 @@ for c = 1:size(clicks,1)
         continue
     end
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%%Not necessary for 320Khz Data
-%     %Use the ratio of the median energy near 75 and 97kHz as a cutoff,
-%     %throwing out clicks with too low a ratio (that means there's too much
-%     %energy at lower frequencies/likely a click lower down)
-%     lowsetC = find(f>72,1,'first');
-%     lowsetD = find(f<77,1,'last');
-%     highsetC = find(f>94,1,'first');
-%     highsetD = find(f<99,1,'last');
-%     %Get the median from each
-%     lowmed = median(specClickTf{c}(lowsetC:lowsetD));
-%     highmed = median(specClickTf{c}(highsetC:highsetD));
-%     specratioH(c) = highmed/lowmed; 
-% 
-%     if specratioH(c) < 1.07
-%         validClicks(c) = 0;
-%         continue
-%     end
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%%Not necessary for 320Khz Data
-%     %Use the ratio of the median energy near 55 kHz and 70 kHz as a cutoff
-%     %- if it's lower than 1.15, throw the click out. 
-%     %identify the bins that will be used to find the low and high values
-%     %for ratio calculation
-%     lowsetA = find(f>52,1,'first');
-%     lowsetB = find(f<57,1,'last');
-%     highsetA = find(f>67,1,'first');
-%     highsetB = find(f<72,1,'last');
-%     %Get the median from each
-%     lowmed = median(specClickTf{c}(lowsetA:lowsetB));
-%     highmed = median(specClickTf{c}(highsetA:highsetB));
-%     specratioL(c) = highmed/lowmed; 
-%     
-%     if specratioL(c) < 1.165
-%         validClicks(c) = 0;
-%         continue
-%     end
-    
-     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      %%%Not necessary for 320Khz Data
-%     %check for local minimum between 60 and 90 kHz, and if it exists closer
-%     %to 90, the click is not valid (likely dsp).
-%     %Find the bins that match the frequencies 60-80 kHz
-%     bottombin = find(f >= p.localminbottom,1, 'first');
-%     topbin = find(f <p.localmintop,1, 'last');
-%     %Find the minimum in that range
-%     localmindb = min(specClickTf{c}(bottombin:topbin));
-%     localminbin = find((specClickTf{c}(1:end-1)) == localmindb);
-%     localminf(c) = f(localminbin);
-% 
-%     if localminf(c) > p.localminThr
-%         validClicks(c) = 0;
-%         continue
-%     end
     
    
     %%%%%%%%%%%%%%%%%

@@ -1,6 +1,12 @@
-% cat_click_times.m
-% Could turn this into a function and instert at the end of de_detector.m
-% function cat_click_times(inDir)
+% cat_click_times.m Code to take all the .mat output files from the
+% detector and produce one .mat with all of the parameters concatenated for
+% that directory, and to calculate the actual times of the clicks (relative
+% to the baby jesus).  Also can call the plotting code to generate one set
+% of plots for each encounter (not separated by .xwav file), unless the
+% bottom section is commented out.
+% Saves one summary .mat and one long list of start/end times as .xls (and
+% plots, if requested)
+
 
 %Set sampling frequency, in Hz
 fs = 320000;

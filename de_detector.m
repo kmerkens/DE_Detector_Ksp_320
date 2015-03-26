@@ -61,9 +61,7 @@ inDisk = fileparts(baseDir(1:3));
 % Right now only wav and xwav files are looked for.
 guideDetector = 1; %1 if using xls sheet to guide detection, 0 to run on all files in drive
 
-[detFiles,encounterTimes,GraphDir]= dFind_xwavs(baseDir,depl,guideDetector); % doesn't read in manual detection 
-% files in this version, but this can be added pretty easily, using an
-% older version.
+[detFiles,encounterTimes,GraphDir]= dFind_xwavs(baseDir,depl,guideDetector); 
 
 viewPath = {metaDir, baseDir};
 [fullFiles,fullLabels] = get_fileset(baseDir,metaDir,detFiles); % returns a list of files to scan through
