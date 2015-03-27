@@ -110,9 +110,10 @@ for c = 1:size(clicks,1)
         continue
     end
     
-%     if peakFr(c) > 140; %make a plot of the spectrum to check what's up with these really high freq signals
-%         plot(specClickTf{c});
-%     end
+%     %if peakFr(c) > 140; %make a plot of the spectrum to check what's up 
+%     %with these really high freq signals
+%          plot(f(1:end-1),specClickTf{c}(1:end-1))
+%     %end
         
  
     

@@ -2,7 +2,8 @@
 function plotClickEncounters_150310(encounterTimes,clickTimes,ppSignal,...
     durClick,specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,f)
 %Generates plots of clicks according to encounter start/end times, as long
-%as the encounter is contained within one .xwav. (so, it's mostly useless) 
+%as the encounter is contained within one .xwav. (so, it's mostly useless),
+%and guideDetector has been selected in de_detector.m
 
 
 
