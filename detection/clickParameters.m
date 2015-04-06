@@ -96,6 +96,21 @@ for c = 1:size(clicks,1)
     specClickTf{c} = spClickSub(specRange)'+PtfN;
     % specNoiseTf{c} = spNoiseSub(specRange)'+PtfN;
 
+    %%%%%%%%%%%%%Added to compare effects of adding tf to spectrum
+%     woPtfN{c} = (spClickSub(specRange));
+%     plot(f,woPtfN{c})
+%     hold on
+%     plot(f,specClickTf{c}, 'k')
+%     
+%     [valMx1, posMx1] = max(woPtfN{c}(1:end-1));
+%     peakFr1 = f(posMx1)
+%     
+%     [valMx2, posMx2] = max(specClickTf{c}(1:end-1));
+%     peakFr2 = f(posMx2)
+%    
+%     
+%     close
+    
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

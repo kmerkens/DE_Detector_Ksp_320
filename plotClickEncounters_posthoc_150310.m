@@ -1,6 +1,6 @@
 
 function [medianValues,meanSpecClicks,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,clickTimes,ppSignal,...
-    durClick,specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,fs)
+    durClick,specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,f)
 % Generates a set of plots for each encounter, even if they span multiple
 % xwavs. Called by cat_click_times.m for plotting after the detector has
 % been run.
@@ -68,17 +68,34 @@ for ne = 1:numEnc
         %sort spectras for peak frequency and prepare for plotting concetanated
         %spectrogram
         [a b]=sort(peakFr(clicksThisEnc));
+        specClickTfThisEnc = specClickTf(firstafterstart:lastbeforeend,1);
 
         specSorted=[];
         for c=1:length(b)
-            thisspec = cell2mat(specClickTf(b(c),:));
+            thisspec = cell2mat(specClickTfThisEnc(b(c),:));
             specSorted(c,:)=thisspec;
         end
+        
+%         %%%%%To make a waterfall plot of the spectra
+%         waterf = 0;
+%         for p = 1:(size(specSorted,1))
+%             
+%             specplot = specSorted(p,:) + waterf;
+%             plot(f,specplot)
+%             hold on
+%             waterf = waterf + 3;
+%         end
+        
+        
         specSorted=specSorted.';
+        
+        
+            
 
         N=size(specSorted,1)*2;
         %f=0:(fs/2000)/(N/2-1):fs/2000; %this should be loaded, don't
-        %recalculate it!
+        %recalculate it! Its particular to the (BPF) parameters that were use to
+        %run the detector
         datarow=size(specSorted,2);
 
         %calculate mean spectra for click and noise
@@ -118,11 +135,13 @@ for ne = 1:numEnc
         xlabel('Frequency (kHz)'), ylabel('Normalized amplitude (dB)')
         ylim([50 150])
         xlim([0 160])
+        line([120 120], [50 1500],'Color','r','LineWidth',1);
         title(['Mean click spectra, n=',num2str(size(specSorted,2))],'FontWeight','bold')
         text(0.5,0.9,['ppRL =',num2str(medianValue(4))],'Unit','normalized')
 
         subplot(2,2,4)
         imagesc(1:datarow, f, specSorted); axis xy; colormap(gray)
+        line([0 datarow+0.5],[120 120],'Color','r','LineWidth',1);
         xlabel('Click number'), ylabel('Frequency (kHz)')
         title(['Clicks sorted by peak frequency'],'FontWeight','bold')
 

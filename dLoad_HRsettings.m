@@ -3,7 +3,8 @@ function parametersHR = dLoad_HRsettings
 %%% Filter and FFT params %%
 %parametersHR.bpRanges = [50000,99000]; % Bandpass filter params in Hz [min,max]
 parametersHR.bpRanges = [5000,159000]; % For Kogia on 320
-parametersHR.frameLengthUs = 1200; % For fft computation
+%parametersHR.frameLengthUs = 1200; % For fft computation
+parametersHR.frameLengthUs = 750; % For Kogia on 320
 parametersHR.overlap = .5; % FFT overlap (in decimal, not percent form)
 parametersHR.chan = 1; % which channel do you want to look at?
 parametersHR.clipThreshold = .98;%  Normalized clipping threshold btwn 0 and 1.  If empty, 

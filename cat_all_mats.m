@@ -135,7 +135,7 @@ close(figure(5));
 
 
 %Next -plot the median values and mean spectra per encounter, perhaps on a multi plot? 
-numMeds = size(allmedianValues,2);
+numMeds = size(allmedianValues,1);
 strnMeds = num2str(numMeds);
 titlecell = {'Peak Frequency', 'Inter-click-interval','Click Duration',...
     'Peak-to-peak amplitude';'(kHz)','(ms)','(\musec)', '(dB)';...
@@ -150,7 +150,7 @@ for p = 1:4
     xlabel([titlecell{3,p},' ',titlecell{2,p}])
     ylabel('Counts')
 end
-text(-1,2.6,['Histgrams of median parameters per Encounter (n = ',strnMeds,')'],'Unit','normalized')
+text(-1,2.55,['Histgrams of median parameters per Encounter (n = ',strnMeds,')'],'Unit','normalized')
 filename = fullfile(GraphDir,['MediansPerEncounter',filedate]);
 saveas(gca, filename, 'tif')
 close(figure(6));

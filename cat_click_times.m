@@ -120,7 +120,7 @@ GraphDir = 'D:\metadata\matlab_graphs';
 
 
 [medianValues,meanSpecClicks,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,clickTimes,ppSignal,durClick,...
-    specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,fs);
+    specClickTf,peakFr,nDur,yFilt,hdr,GraphDir,f);
 
 
 %Then save everything
