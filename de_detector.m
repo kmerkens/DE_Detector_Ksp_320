@@ -37,20 +37,20 @@ tfFullFile = 'C:\Users\Karlina.Merkens\Documents\HARPTFfiles\600_series\692_1211
 
 % Location of base directory containing directories of files to be analyzed
 %baseDir = 'I:\GofMXArraySpRecs\Sb';
-baseDir = 'D:\';
-%baseDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\';
+%baseDir = 'D:\';
+baseDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\';
 
 % Name of the deployment. This should be the first few characters in the 
 % directory(ies) you want to look in you want to look at. For now,
 % directory hierarchy is expected to be: basedir>depl*>*.x.wav
 % TODO: implement recursive directory search for more flexibility.
 %depl = 'GofMX_';
-%depl = '320_';
-depl = 'Hawaii';
+depl = '320_';
+%depl = 'Hawaii';
 
 
 % Set flags indicating which routines to run. 
-lowResDet = 0; %run short time detector.
+lowResDet = 1; %run short time detector.
 highResDet = 1; %run high res detector
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,7 +59,7 @@ inDisk = fileparts(baseDir(1:3));
 
 % Build list of (x)wav names in the base directory.
 % Right now only wav and xwav files are looked for.
-guideDetector = 1; %1 if using xls sheet to guide detection, 0 to run on all files in drive
+guideDetector = 0; %1 if using xls sheet to guide detection, 0 to run on all files in drive
 
 [detFiles,encounterTimes,GraphDir]= dFind_xwavs(baseDir,depl,guideDetector); 
 

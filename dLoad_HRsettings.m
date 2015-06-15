@@ -2,7 +2,7 @@ function parametersHR = dLoad_HRsettings
 
 %%% Filter and FFT params %%
 %parametersHR.bpRanges = [50000,99000]; % Bandpass filter params in Hz [min,max]
-parametersHR.bpRanges = [5000,159000]; % For Kogia on 320
+parametersHR.bpRanges = [1000,159000]; % For Kogia on 320
 %parametersHR.frameLengthUs = 1200; % For fft computation
 parametersHR.frameLengthUs = 750; % For Kogia on 320
 parametersHR.overlap = .5; % FFT overlap (in decimal, not percent form)
@@ -13,7 +13,9 @@ parametersHR.clipThreshold = .98;%  Normalized clipping threshold btwn 0 and 1. 
 
 %%% Recieved level threshold params %%%
 parametersHR.ppThresh = 100;% minimum  RL threshold - dB peak to peak.
-parametersHR.countThresh = 3500; % Keep consistent with Lo-res for predictability.
+%parametersHR.countThresh = 3500; % Keep consistent with Lo-res for predictability.
+%Up for new filter
+parametersHR.countThresh = 7000;
 % Can be higher than low res, but not lower!
 % Keep count threshold less than equivalent pp threshold. 
 %   dBs = 10*log10(abs(fft(counts *2^14))) - 10*log10(fs/(length(fftWindow)))...
@@ -33,9 +35,9 @@ parametersHR.delphClickDurLims = [5,30];% [min,max] duration in microsec
 
 %%% Other pruning params %%%
 %parametersHR.cutPeakBelowKHz = 80; % discard click if peak frequency below X kHz
-parametersHR.cutPeakBelowKHz = 110; %% For Kogia on 320
+parametersHR.cutPeakBelowKHz = 100; %% For Kogia on 320
 %parametersHR.cutPeakAboveKHz = 99.9; % discard click if peak frequency above Y kHz 
-parametersHR.cutPeakAboveKHz = 150;%% For Kogia on 320
+parametersHR.cutPeakAboveKHz = 159;%% For Kogia on 320
 parametersHR.minClick_us = 16;% Minimum duration of a click in us 
 parametersHR.maxClick_us = 1000; % Max duration of a click including echos
 %parametersHR.maxNeighbor = 1; % max time in seconds allowed between neighboring 

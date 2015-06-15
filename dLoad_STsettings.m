@@ -6,7 +6,7 @@ parametersST.buff = 500; % # of buffer samples to add on either side of area of 
 parametersST.chan = 1; % which channel do you want to look at?
 
 %parametersST.fRanges = [50000 99000]; 
-parametersST.fRanges = [5000,159000]; % For Kogia on 320
+parametersST.fRanges = [1000,159000]; % For Kogia on 320
 %parametersST.thresholds = 13500; % Amplitude threshold in counts. 
 parametersST.thresholds = 3500; % Trying to find something that will get 
 %the very quiet kogia clicks. 

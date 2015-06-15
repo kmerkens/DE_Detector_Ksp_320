@@ -16,7 +16,7 @@ noise = [];
 
 if ~ isempty(candidatesRel)
 
-    % noise = dHR_get_noise(candidatesRel,length(energy),p,hdr);
+    noise = dHR_get_noise(candidatesRel,length(energy),p,hdr);
 
     [sStarts, sStops] = spDurations(candidatesRel, minGap_samples,length(energy));
 
@@ -26,3 +26,6 @@ if ~ isempty(candidatesRel)
     completeClicks = [c_starts, c_stops];
 
 end
+
+
+    
