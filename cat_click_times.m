@@ -12,8 +12,8 @@
 fs = 320000;
 
 %inDir = 'E:\metadata\bigDL'; % the path to your directory of detector outputs goes here
-%inDir = 'D:\metadata\Hawaii18K_disk04';
-inDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\metadata\320_Detector_Test';
+inDir = 'D:\metadata\Hawaii18K_disk04';
+%inDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\metadata\320_Detector_Test';
 matList = dir(fullfile(inDir,'Haw*.mat')); % Add wildcard to match the files you want to process.
 clickDnum = [];
 durClickcon = [];
@@ -92,14 +92,14 @@ xlswrite([inDir,'\',choppedDir{3},'_ClicksOnlyConcatCHAR',filedate,'.xls'],click
 
 %Get detectionTimes
 %get excel file to read
-[infile,inpath]=uigetfile('*.xls','Select .xls file to guide encounters');
-if isequal(infile,0)
-    disp('Cancel button pushed');
-    return
-end
+% [infile,inpath]=uigetfile('*.xls','Select .xls file to guide encounters');
+% if isequal(infile,0)
+%     disp('Cancel button pushed');
+%     return
+% end
 
-% inpath = 'C:\Users\Karlina.Merkens\Documents\Kogia\AnalysisLogs\HAWAII18K';
-% infile = 'HAWAII18K_Ksp_Combo_ForDetector_150310.xls';
+inpath = 'C:\Users\Karlina.Merkens\Documents\Kogia\AnalysisLogs\HAWAII18K';
+infile = 'HAWAII18K_Ksp_Combo_ForDetector_150310.xls';
 
 % %read the file into 3 matrices-- numeric, text, and raw cell array
 [num, txt, raw] = xlsread([inpath '\' infile]);
@@ -127,18 +127,19 @@ specNoiseTf = specNoiseTfcon;
 peakFr = peakFrcon;
 nDur = nDurcon;
 yFilt = yFiltcon;
-GraphDir = [inDir,'\matlab_graphs'];
-%GraphDir = 'E:\metadata\matlab_graphs';
+%GraphDir = [inDir,'\matlab_graphs'];
+GraphDir = 'D:\metadata\matlab_graphs';
 
 
-[medianValues,meanSpecClicks,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,clickTimes,ppSignal,durClick,...
-    specClickTf,specNoiseTf,peakFr,nDur,yFilt,hdr,GraphDir,f);
+[medianValues,meanSpecClicks,meanSpecNoises,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,...
+    clickTimes,ppSignal,durClick,specClickTf,specNoiseTf,peakFr,nDur,yFilt,hdr,GraphDir,f);
 
 
 %Then save everything
 save([inDir,'\',choppedDir{3},'_ClicksOnlyConcat',filedate,'.mat'],...
     'clickDnum','durClickcon','nDurcon', 'peakFrcon','ppSignalcon',...
-    'specClickTfcon','yFiltcon','medianValues','meanSpecClicks','iciEncs','f')
+    'specClickTfcon','specNoiseTfcon','yFiltcon','medianValues',...
+    'meanSpecClicks','meanSpecNoises','iciEncs','f')
 
 
 

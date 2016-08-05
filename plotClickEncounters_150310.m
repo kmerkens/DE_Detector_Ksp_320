@@ -1,6 +1,6 @@
 
 function plotClickEncounters_150310(encounterTimes,clickTimes,ppSignal,...
-    durClick,specClickTf,specNoiseTf,peakFr,peakFrNew,nDur,yFilt,hdr,GraphDir,f)
+    durClick,specClickTf,specNoiseTf,peakFr,nDur,yFilt,hdr,GraphDir,f)
 %Generates plots of clicks according to encounter start/end times, as long
 %as the encounter is contained within one .xwav. (so, it's mostly useless),
 %and guideDetector has been selected in de_detector.m
@@ -52,7 +52,7 @@ for ne = 1:numEnc
         medianValue(3) = prctile(durClick(clicksThisEnc),50);%calculate median duration
         medianValue(4) = prctile(ppSignal(clicksThisEnc),50);%calculate median inter-pulse interval
         %medianValue(5) = prctile(F0Sel,50);%calculate median center frequency
-        medianValue(5) = prctile(peakFrNew(clicksThisEnc),50);%calculate median peak frequency from narrow band
+        %medianValue(5) = prctile(peakFrNew(clicksThisEnc),50);%calculate median peak frequency from narrow band
         clickCount = sum(clicksThisEnc);%count number of clicks in analysis
         maxRL = max(ppSignal(clicksThisEnc));
 
@@ -61,11 +61,17 @@ for ne = 1:numEnc
         [a b]=sort(peakFr(clicksThisEnc));
 
         specSorted=[];
+        noiseSorted = [];
         for c=1:length(b)
             thisspec = cell2mat(specClickTf(b(c),:));
             thisnoise = cell2mat(specNoiseTf(b(c),:));
-            specSorted(c,:)= thisspec;
-            noiseSorted(c,:) = thisnoise;
+            specSorted(c,:) = thisspec;
+            try
+                noiseSorted(c,:) = thisnoise;
+            catch
+                warning('here is the mismatch')
+                a = 1;
+            end
         end
         specSorted=specSorted.';
         noiseSorted = noiseSorted.';
@@ -94,12 +100,13 @@ for ne = 1:numEnc
 
         subplot(2, 2, 1);
         vec=0:1:160;
-        hist(peakFrNew(clicksThisEnc),vec)
+        %hist(peakFrNew(clicksThisEnc),vec)
+        hist(peakFr(clicksThisEnc),vec)
         xlim([0 160])
         xlabel('peak frequency (narrow band) (kHz)')
         ylabel('counts')
         text(0.05,0.9,['pfr (wide) =',num2str(medianValue(1)),' kHz'],'Unit','normalized')
-        text(0.08,0.9,['pfr (narrow) =',num2str(medianValue(5)),' kHz'],'Unit','normalized'
+        %text(0.08,0.9,['pfr (narrow) =',num2str(medianValue(5)),' kHz'],'Unit','normalized')
         %text(0.5,0.8,['cfr =',num2str(medianValue(5)),' kHz'],'Unit','normalized')
 
         subplot(2,2,2)
@@ -115,10 +122,10 @@ for ne = 1:numEnc
         plot(f,meanSpecClick,'LineWidth',2), hold on
         plot(f,meanSpecNoise,':k','LineWidth',2), hold off
         xlabel('Frequency (kHz)'), ylabel('Normalized amplitude (dB)')
-        %ylim([50 150])
-        ylim([100 180])
+        ylim([140 200])
+        %ylim([100 180])
         xlim([0 160])
-        line([80 80], [50 1500],'Color','r','LineWidth',1);
+        line([80 80], [50 300],'Color','r','LineWidth',1);
         title(['Mean click spectra, n=',num2str(size(specSorted,2))],'FontWeight','bold')
         text(0.5,0.9,['ppRL =',num2str(medianValue(4))],'Unit','normalized')
 
@@ -137,11 +144,11 @@ for ne = 1:numEnc
         plot(f,meanSpecClick,'LineWidth',2), hold on
         plot(f,meanSpecNoise,':k','LineWidth',2), hold off
         xlabel('Frequency (kHz)'), ylabel('Normalized amplitude (dB)')
-        %ylim([50 150])
-        ylim([100 180])
+        ylim([140 210])
+        %ylim([100 180])
         xlim([0 160])
-        line([80 80], [50 1500],'Color','r','LineWidth',1);
-        line([120 120], [50 1500],'Color','r','LineWidth',1,'LineStyle',':');
+        line([80 80], [50 300],'Color','r','LineWidth',1);
+        line([120 120], [50 300],'Color','r','LineWidth',1,'LineStyle',':');
         title(['Mean click spectra, n=',num2str(size(specSorted,2))],'FontWeight','bold')
         text(0.05,0.9,['pfr =',num2str(medianValue(1)),' kHz'],'Unit','normalized')
 
