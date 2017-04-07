@@ -27,26 +27,27 @@ tic
 % Set transfer function location
 %tfFullFile = 'E:\Code\TF_files\604_100614\604_100614_invSensit.tf';
 %tfFullFile = 'H:\Cetacean Research Program\HARP\TF_files\695_121203_invSensit.tf';
-tfFullFile = 'C:\Users\Karlina.Merkens\Documents\HARPTFfiles\600_series\692_121119\692_121119_invSensit.tf';
+% tfFullFile = 'C:\Users\Karlina.Merkens\Documents\HARPTFfiles\600_series\692_121119\692_121119_invSensit.tf';
 
 
 
 % Note, if you don't have a tranfer function just use:
-% tfFullFile = [];
+tfFullFile = [];
 
 
 % Location of base directory containing directories of files to be analyzed
 %baseDir = 'I:\GofMXArraySpRecs\Sb';
-%baseDir = 'D:\';
-baseDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\';
+ baseDir = 'D:\Hawaii_K_23_02\';
+%baseDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\';
+%baseDir = 'C:\Users\KMERKENS\Documents\Kogia\OtherRecordings\NOAACRP_CNMI_Ksima_Wild\';
 
 % Name of the deployment. This should be the first few characters in the 
 % directory(ies) you want to look in you want to look at. For now,
 % directory hierarchy is expected to be: basedir>depl*>*.x.wav
 % TODO: implement recursive directory search for more flexibility.
-%depl = 'GofMX_';
-depl = '320_';
-%depl = 'Hawaii';
+depl = 'Hawaii';
+%depl = '320_';
+%depl = 'kogia';
 
 
 % Set flags indicating which routines to run. 

@@ -1,5 +1,5 @@
 
-function [medianValues,meanSpecClicks,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,clickTimes,ppSignal,...
+function [medianValues,meanSpecClicks,meanSpecNoises,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,clickTimes,ppSignal,...
     durClick,specClickTf,specNoiseTf,peakFr,nDur,yFilt,hdr,GraphDir,f)
 % Generates a set of plots for each encounter, even if they span multiple
 % xwavs. Called by cat_click_times.m for plotting after the detector has
@@ -14,6 +14,7 @@ clickDnum = clickTimes;
 numEnc = size(encounterTimes,1);
 clickCounts = [];
 meanSpecClicks = [];
+meanSpecNoises = [];
 medianValues = [];
 iciEncs = [];
 for ne = 1:numEnc
@@ -108,7 +109,9 @@ for ne = 1:numEnc
         SpecClickplusID = [encStart,meanSpecClick];
         meanSpecClicks = [meanSpecClicks; SpecClickplusID];
 
-        meanSpecNoise=mean(specSortedNoise');
+        meanSpecNoise = mean(specSortedNoise');
+        SpecNoiseplusID = [encStart,meanSpecNoise];
+        meanSpecNoises = [meanSpecNoises; SpecNoiseplusID];
 
 %         sep = strfind(pathstr,'\');
 %         disk = pathstr(sep(2)+1:length(pathstr));
