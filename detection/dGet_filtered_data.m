@@ -22,5 +22,10 @@ data = ioReadXWAV(fid, hdr, start, stop, channel, fullFiles);
 % filter the data
 %wideBandData = filter(wideBandFilter,1,data);
 %wideBandData = filter(wideBandFilter(1,:), wideBandFilter(2,:),data);
-wideBandData = filtfilt(wideBandFilter(1,:), wideBandFilter(2,:),data);
-wideBandData = wideBandData(wideBandTaps+1:end);
+%Check length - must be longer than 36 samples to run filtfilt
+if size(data,2) > 36
+    wideBandData = filtfilt(wideBandFilter(1,:), wideBandFilter(2,:),data);
+    wideBandData = wideBandData(wideBandTaps+1:end);
+else
+    wideBandData = 0;
+end

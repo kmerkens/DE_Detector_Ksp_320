@@ -16,7 +16,7 @@ parametersHR.clipThreshold = .98;%  Normalized clipping threshold btwn 0 and 1. 
 parametersHR.ppThresh = 40;% minimum  RL threshold - dB peak to peak. lowered 160729 testing mirror fixes
 %parametersHR.countThresh = 3500; % Keep consistent with Lo-res for predictability.
 %Up for new filter
-parametersHR.countThresh = 50000;
+parametersHR.countThresh = 1000; %170425 down frim 50/then 40 K for HAWK 23
 % Can be higher than low res, but not lower!
 % Keep count threshold less than equivalent pp threshold. 
 %   dBs = 10*log10(abs(fft(counts *2^14))) - 10*log10(fs/(length(fftWindow)))...
@@ -30,21 +30,29 @@ parametersHR.dEvLims = [-.4,.9];  % [min,max] Envelope energy distribution compa
 % more energy in the first half of the click (dolphin) dEv >0, If it's more
 % in the second half (boats?) dEv<0. If it's about the same (beaked whale)
 % dEnv ~= 0 , but still allow a range...
-parametersHR.delphClickDurLims = [5,30];% [min,max] duration in microsec 
-% allowed for high energy envelope of click
+parametersHR.delphClickDurLims = [5,100];% [min,max] duration in microsec 
+% allowed for high energy envelope of click, 170421 max increased from 30
+% to 100 for 320 data.
 
 
 %%% Other pruning params %%%
 %parametersHR.cutPeakBelowKHz = 80; % discard click if peak frequency below X kHz
-parametersHR.cutPeakBelowKHz = 80; %% For Kogia on 320
+parametersHR.cutPeakBelowKHz = 100; %% For Kogia on 320
 %parametersHR.cutPeakAboveKHz = 99.9; % discard click if peak frequency above Y kHz 
-parametersHR.cutPeakAboveKHz = 159;%% For Kogia on 320
-parametersHR.minClick_us = 16;% Minimum duration of a click in us 
+parametersHR.cutPeakAboveKHz = 150;%% For Kogia on 320
+parametersHR.minClick_us = 50;% Minimum duration of a click in us, increased from 16
 parametersHR.maxClick_us = 1000; % Max duration of a click including echos
 %parametersHR.maxNeighbor = 1; % max time in seconds allowed between neighboring 
 % clicks. Clicks that are far from neighbors can be rejected using this parameter,
 % good for dolphins in noisy environments because lone clicks or pairs of
 % clicks are likely false positives
+parametersHR.maxClick95_us = 500; % Max duration of 95% of the click,
+%including echos. Measures a shorter segment of the click than maxClick_us, 
+%so, if they are set to the same number that one will not be used (clicks will
+%get thrown out with this first). 170327 set to 270 for VJanik data, to
+%remove double-clicks (echoes?) Set to 260 for DMann data to remove single
+%outlier at 350 us. Otherwise, set to 500
+%to remove spurious signals.
 parametersHR.maxNeighbor = 2; %Increased, to get faint kogia detections. 
 
 parametersHR.mergeThr = 50;% min gap between energy peaks in us. Anything less

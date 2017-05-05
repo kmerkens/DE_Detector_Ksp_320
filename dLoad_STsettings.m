@@ -6,12 +6,11 @@ parametersST.buff = 500; % # of buffer samples to add on either side of area of 
 parametersST.chan = 1; % which channel do you want to look at?
 
 %parametersST.fRanges = [50000 99000]; 
-parametersST.fRanges = [10000,159000]; % For Kogia on 320
+parametersST.fRanges = [90000,140000]; % For Kogia on 320, from 10-159K
 %parametersST.thresholds = 13500; % Amplitude threshold in counts. 
-parametersST.thresholds = 50000; % Trying to find something that will get 
-%the very quiet kogia clicks. 
-%150311 - changed from 5000 - was this set wrong? That's higer than the
-%3500 in the hi res which it shouldn't be.  are the units the same?
+parametersST.thresholds = 1000; % Trying to find something that will get 
+%the very quiet kogia clicks. 170425 down frim 50/then 40 K for HAWK 23
+%150311 - changed from 5000 
 % For predictability, keep this consistent between low and hi res steps.
 
 parametersST.frameLengthSec = .01; %Used for calculating fft size

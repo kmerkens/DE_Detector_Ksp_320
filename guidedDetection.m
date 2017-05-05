@@ -14,15 +14,17 @@ function [xwavNames,matlabDates,GraphDir] = guidedDetection(baseDir)
 %   change them back to datestrings after you 
 %   run this code.
 
-% %get excel file to read
-% [infile,inpath]=uigetfile('*.xls','Select .xls file to guide detector');
-% if isequal(infile,0)
-%     disp('Cancel button pushed');
-%     return
-% end
+%   get excel file to read
+[infile,inpath]=uigetfile('*.xls','Select .xls file to guide detector');
+if isequal(infile,0)
+    disp('Cancel button pushed');
+    return
+end
+% inpath = 'C:\Users\KMERKENS\Documents\Kogia\AnalysisLogs';
+% infile = 'HAWAII23K_02_Ksp_320kHz_manualANDAuto_kpm_170428.xls';
 
-inpath = 'C:\Users\Karlina.Merkens\Documents\Kogia\AnalysisLogs\HAWAII18K';
-infile = 'HAWAII18K_Ksp_Combo_ForDetector_150310.xls';
+% inpath = 'C:\Users\Karlina.Merkens\Documents\Kogia\AnalysisLogs\HAWAII18K';
+% infile = 'HAWAII18K_Ksp_Combo_ForDetector_150310.xls';
 
 %read the file into 3 matrices-- numeric, text, and raw cell array
 [num, txt, raw] = xlsread([inpath '\' infile]);
@@ -52,7 +54,7 @@ mkdir(GraphDir)
 input_file = txt{2,1};
 under = strfind(input_file, '_');
 %depl = input_file(1:under(1)-1);
-depl = 'Hawaii18K';
+depl = 'Hawaii';
 
 %find folders on disk and remove those that don't belong to data
 folders = dir(BaseDir);
@@ -60,7 +62,7 @@ foldersDepl = folders;
 for fidx = 1:length(folders)
     true = strfind(folders(fidx).name, depl);
     other = strfind(folders(fidx).name, 'other');
-    decim = strfind(folders(fidx).name, 'd100');
+    decim = strfind(folders(fidx).name, 'deci');
     if isempty(true) || ~isempty(decim) ||~isempty(other)
         trueIdx(fidx) = 0;
     else

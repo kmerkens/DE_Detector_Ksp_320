@@ -9,10 +9,10 @@ clickSampleLims = ceil((hdr.fs./1e6).*[p.minClick_us, p.maxClick_us]);
 if license('test', 'curve_fitting_toolbox') == 1
     dataSmooth = smooth(abs(bpDataHi),15);
 else
-	dataSmooth = fastsmooth(abs(bpDataHi),15);
+	dataSmooth = fastsmooth(abs(bpDataHi),15,1,1);
 end
 
-thresh = prctile(dataSmooth,70);
+thresh = prctile(dataSmooth,96); %Changed from 70 to 96 170425 to deal with very low noise in 320 data.
 for itr = 1:length(sStarts)
     rangeVec = sStarts(itr):sStops(itr);
     % Discard smooth to make an envelope
