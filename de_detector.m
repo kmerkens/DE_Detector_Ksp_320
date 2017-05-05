@@ -37,6 +37,7 @@ tfFullFile = 'C:\Users\Karlina.Merkens\Documents\HARPTFfiles\600_series\692_1211
 
 % Location of base directory containing directories of files to be analyzed
 %baseDir = 'I:\GofMXArraySpRecs\Sb';
+
  baseDir = 'D:\Hawaii_K_23_02\';
 %baseDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\';
 %baseDir = 'C:\Users\KMERKENS\Documents\Kogia\OtherRecordings\NOAACRP_CNMI_Ksima_Wild\';
@@ -45,9 +46,11 @@ tfFullFile = 'C:\Users\Karlina.Merkens\Documents\HARPTFfiles\600_series\692_1211
 % directory(ies) you want to look in you want to look at. For now,
 % directory hierarchy is expected to be: basedir>depl*>*.x.wav
 % TODO: implement recursive directory search for more flexibility.
+
 depl = 'Haw';
 %depl = '320_';
 %depl = 'kogia';
+
 
 
 % Set flags indicating which routines to run. 

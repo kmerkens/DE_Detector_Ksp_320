@@ -12,7 +12,9 @@
 fs = 320000;
 
 %inDir = 'E:\metadata\bigDL'; % the path to your directory of detector outputs goes here
+
 inDir = 'D:\Hawaii_K_23_02\metadata\Hawaii_K_23_02_disk02';
+
 %inDir = 'C:\Users\Karlina.Merkens\Documents\Kogia\320_detectctor_dir\metadata\320_Detector_Test';
 matList = dir(fullfile(inDir,'Haw*.mat')); % Add wildcard to match the files you want to process.
 
@@ -165,14 +167,14 @@ xlswrite([inDir,'\',choppedDir{4},'_BOUTS',filedate,'.xls'],boutsChar)
 
 %Get detectionTimes
 %get excel file to read
-[infile,inpath]=uigetfile('*.xls','Select .xls file to guide encounters');
-if isequal(infile,0)
-    disp('Cancel button pushed');
-    return
-end
+% [infile,inpath]=uigetfile('*.xls','Select .xls file to guide encounters');
+% if isequal(infile,0)
+%     disp('Cancel button pushed');
+%     return
+% end
 
-% inpath = 'C:\Users\Karlina.Merkens\Documents\Kogia\AnalysisLogs\HAWAII18K';
-% infile = 'HAWAII18K_Ksp_Combo_ForDetector_150310.xls';
+inpath = 'C:\Users\Karlina.Merkens\Documents\Kogia\AnalysisLogs\HAWAII18K';
+infile = 'HAWAII18K_Ksp_Combo_ForDetector_150310.xls';
 
 % %read the file into 3 matrices-- numeric, text, and raw cell array
 [num, txt, raw] = xlsread([inpath '\' infile]);
@@ -203,6 +205,7 @@ ndur95 = ndur95con;
 peakFr = peakFrcon;
 nDur = nDurcon;
 yFilt = yFiltcon;
+<<<<<<< HEAD
 f = fsaved;
 GraphDir = [inDir,'\matlab_graphs'];
 %GraphDir = 'D:\metadata\matlab_graphs';
@@ -246,4 +249,21 @@ save([inDir,'\',choppedDir{4},'_ClicksOnlyConcat',filedate,'.mat'],...
 %     'specClickTfcon','specNoiseTfcon','yFiltcon','f')
 % 
 % 
+=======
+%GraphDir = [inDir,'\matlab_graphs'];
+GraphDir = 'D:\metadata\matlab_graphs';
+
+
+[medianValues,meanSpecClicks,meanSpecNoises,iciEncs] = plotClickEncounters_posthoc_150310(encounterTimes,...
+    clickTimes,ppSignal,durClick,specClickTf,specNoiseTf,peakFr,nDur,yFilt,hdr,GraphDir,f);
+
+
+%Then save everything
+save([inDir,'\',choppedDir{3},'_ClicksOnlyConcat',filedate,'.mat'],...
+    'clickDnum','durClickcon','nDurcon', 'peakFrcon','ppSignalcon',...
+    'specClickTfcon','specNoiseTfcon','yFiltcon','medianValues',...
+    'meanSpecClicks','meanSpecNoises','iciEncs','f')
+
+
+>>>>>>> c9a8ff34f1872e3a06b7e43bb9d78932a592fb47
 

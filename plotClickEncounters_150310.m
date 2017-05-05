@@ -1,6 +1,7 @@
 
 function plotClickEncounters_150310(encounterTimes,clickTimes,ppSignal,...
     durClick,dur95,bw3db,bw10db,specClickTf,specNoiseTf,peakFr,nDur,yFilt,hdr,GraphDir,f)
+
 %Generates plots of clicks according to encounter start/end times, as long
 %as the encounter is contained within one .xwav. (so, it's mostly useless),
 %and guideDetector has been selected in de_detector.m
@@ -52,10 +53,10 @@ for ne = 1:numEnc
         medianValue(3) = prctile(durClick(clicksThisEnc),50);%calculate median duration
         medianValue(4) = prctile(ppSignal(clicksThisEnc),50);%calculate median inter-pulse interval
         %medianValue(5) = prctile(F0Sel,50);%calculate median center frequency
-        %medianValue(5) = prctile(peakFrNew(clicksThisEnc),50);%calculate median peak frequency from narrow band
         medianValue(5) = prctile(peakFrNew(clicksThisEnc),50);%calculate median peak frequency from narrow band
         medianValue(6) = prctile(bw3db(clicksThisEnc),50); %calculate median -3dB BW
         medianValue(7) = prctile(bw10db(clicksThisEnc),50); %calculate median -10dB BW
+
         clickCount = sum(clicksThisEnc);%count number of clicks in analysis
         maxRL = max(ppSignal(clicksThisEnc));
 

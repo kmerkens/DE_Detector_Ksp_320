@@ -4,10 +4,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Load data
+
 inDir = 'C:\Users\KMERKENS\Documents\Kogia\DetectorOutput\Hawaii_K_23_02';
 GraphDir = 'C:\Users\KMERKENS\Documents\Kogia\DetectorOutput\Hawaii_K_23_02\Final_histograms';
 
 matList = dir(fullfile(inDir,'Hawaii*.mat')); % Add wildcard to match the files you want to process.
+
 
 fs = 320000;
 
@@ -60,6 +62,7 @@ strnumenc = num2str(numenc);
 filedate = datestr(now, 'yymmdd');
 
 save([inDir,'_AllParamsConcat',filedate,'.mat'],...
+
 'f','allclickDnum','alldurClickcon','allndur95con',...
 'allbw3dbcon','allbw10dbcon','allnDurcon','allpeakFrcon',...
 'allppSignalcon','allspecClickTfcon','allspecNoiseTfcon','allyFiltcon',...
@@ -346,7 +349,6 @@ for s = 1:numspecClick
 end
 grandmeanSpec = mean(concatspecs);
 
-
 for s = 1:numspecNoise
         concatspecsN = [concatspecsN;allspecNoiseTfcon{s,1}'];
 end
@@ -516,9 +518,11 @@ SummaryStats = [Q1durClick Q1nDur Q1ndur95 Q1bw3db Q1bw10db Q1peakFr Q1ppSig Q1i
     skedurClick skenDur skendur95 skebw3db skebw10db skepeakFr skeppSignal skeiciEncs];
 
 
+
 filename = fullfile(inDir,['SummaryStats_',filedate]);
 save(filename, 'SummaryStats')
 xlswrite([filename,'.xls'],SummaryStats)
 %Write csv with headers
 headers = {'durClick','nDur','ndur95','bw3db','bw10db','peakFr','ppSig','iciEncs'};
 csvwrite_with_headers([filename,'.csv'],SummaryStats,headers)
+
